@@ -1,88 +1,110 @@
-import CardContent from '@material-ui/core/CardContent'
-import CardActions from '@material-ui/core/CardActions'
-import Typography from '@material-ui/core/Typography'
-import TextField from '@material-ui/core/TextField'
-import Button from '@material-ui/core/Button'
-import Grid from '@material-ui/core/Grid'
-import Card from '@material-ui/core/Card'
-import DatePicker from 'react-datepicker'
+import MenuItem from '@material-ui/core/MenuItem'
+import Select from '@material-ui/core/Select'
 import React, {Component} from 'react'
 import {TodoList} from './todo-list'
 import moment from 'moment'
-import '../css/app.css'
+import '../css/todoApp.css'
 
 export class TodoApp extends Component {
 
     constructor(props) {
 
-        super(props);
-        this.state = {items: [], text: '', priority: 0, dueDate: moment()};
-        this.handleTextChange = this.handleTextChange.bind(this);
-        this.handlePriorityChange = this.handlePriorityChange.bind(this);
-        this.handleDateChange = this.handleDateChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
+        super(props)
+        this.state = {items: [], description: '', priority: 0, endDate: moment().format('YYYY-MM-DD'), title: '', open: false}
+        this.handleTitleChange = this.handleTitleChange.bind(this)
+        this.handlePriorityChange = this.handlePriorityChange.bind(this)
+        this.handleDateChange = this.handleDateChange.bind(this)
+        this.handleSubmit = this.handleSubmit.bind(this)
+        this.handleClose = this.handleClose.bind(this)
+        this.handleOpen = this.handleOpen.bind(this)
+        this.handleDescriptionChange = this.handleDescriptionChange.bind(this)
+        this.handleLocalStorage = this.handleLocalStorage.bind(this)
     }
 
     render() {
-
         return (
-            <div className="TodoApp" >
-                <br/>
-                <Card className="todo-form">
-                    <CardContent>
-                        <Typography color="textSecondary" gutterBottom>
-                            Create a New TODO
-                        </Typography>
-                        <Grid container spacing={0}>
-                            <Grid item xs={12}>
-                                <TextField
-                                    id="text"
-                                    label="Text"
-                                    onChange={this.handleTextChange}
-                                    value={this.state.text}
-                                    margin="normal"
-                                    variant="outlined"
-                                />
-                            </Grid>
-                            <Grid item xs={12}>
-                                <TextField
-                                    id="priority"
-                                    type="number"
-                                    onChange={this.handlePriorityChange}
-                                    value={this.state.priority}
-                                    label="Priority"
-                                    margin="normal"
-                                    variant="outlined"
-                                />
-                            </Grid>
-                            <Grid item xs={12}>
-                                <DatePicker
-                                    id="due-date"
-                                    selected={this.state.dueDate}
-                                    placeholderText="Due date"
-                                    onChange={this.handleDateChange}>
-                                </DatePicker>
-                            </Grid>
-                        </Grid>
-                    </CardContent>
-                    <CardActions>
-                        <Button size="small" onClick={this.handleSubmit}>
-                            <Typography color="textSecondary" gutterBottom>
-                                Add
-                            </Typography>
-                        </Button>
-                    </CardActions>
-                </Card>
-                <br/><br/>
-                <TodoList todoList={this.state.items}/>
+            <div>
+
+                <div className="card">
+
+                    <h5 className="card-header white-text text-center py-4 young-passion-gradient">
+                        <strong>New Card</strong>
+                    </h5>
+
+                    <div className="card-body px-lg-5 pt-0">
+
+                        <form className="md-form" style={{color: '#757575'}} onSubmit={this.handleSubmit}>
+
+
+                            <input type="text"
+                                   className="form-control"
+                                   placeholder='Title'
+                                   value={this.state.title}
+                                   onChange={this.handleTitleChange}
+                            />
+
+                            <input placeholder="Due date" type="date" id="endDate"
+                                   className="form-control datepicker" onChange={this.handleDateChange}
+                                   value={this.state.endDate}
+                            />
+
+                            Priority <Select
+                                value={this.state.priority}
+                                open={this.state.open}
+                                onClose={this.handleClose}
+                                onOpen={this.handleOpen}
+                                onChange={this.handlePriorityChange}
+                            >
+                                <MenuItem value="">
+                                    <em>None</em>
+                                </MenuItem>
+                                <MenuItem value={1}>1</MenuItem>
+                                <MenuItem value={2}>2</MenuItem>
+                                <MenuItem value={3}>3</MenuItem>
+                                <MenuItem value={4}>4</MenuItem>
+                                <MenuItem value={5}>5</MenuItem>
+                            </Select>
+
+                            <textarea type="text" id="description"
+                              className="form-control md-textarea" rows="3" placeholder='description'
+                              onChange={this.handleDescriptionChange} value={this.state.description}
+                            />
+
+                            <button className="btn btn-rounded btn-block z-depth-0 my-4 waves-effect
+                                young-passion-gradient" style={{ 'borderRadius': '46px', color: 'white'}} type="submit"
+                                onClick={this.handleSubmit}>
+                                Create
+                            </button>
+                        </form>
+                    </div>
+                </div>
             </div>
         )
     }
 
-    handleTextChange(e) {
+    handleLocalStorage(items) {
+
+        localStorage.setItem('items', JSON.stringify(items))
+    }
+
+    handleClose() {
+        this.setState({open: false})
+    }
+
+    handleOpen() {
+        this.setState({open: true})
+    }
+
+    handleTitleChange(e) {
         this.setState({
-            text: e.target.value
-        });
+            title: e.target.value
+        })
+    }
+    
+    handleDescriptionChange(e) {
+        this.setState({
+            description: e.target.value
+        })
     }
 
     handlePriorityChange(e) {
@@ -93,7 +115,7 @@ export class TodoApp extends Component {
 
     handleDateChange(date) {
         this.setState({
-            dueDate: date
+            endDate: date
         });
     }
 
@@ -101,20 +123,24 @@ export class TodoApp extends Component {
 
         e.preventDefault();
 
-        if (!this.state.text.length || !this.state.priority.length || !this.state.dueDate)
+        if (!this.state.title.length || !this.state.priority || !this.state.endDate)
             return;
 
         const newItem = {
-            text: this.state.text,
+            title: this.state.title,
             priority: this.state.priority,
-            dueDate: this.state.dueDate,
-
-        };
+            endDate: this.state.endDate,
+            description: this.state.description,
+        }
         this.setState(prevState => ({
             items: prevState.items.concat(newItem),
-            text: '',
+            title: '',
             priority: '',
-            dueDate: ''
-        }));
+            endDate: moment().format('YYYY-MM-DD'),
+            description: '',
+        }))
+
+
+        this.handleLocalStorage(this.state.items.concat(newItem))
     }
 }

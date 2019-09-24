@@ -1,9 +1,8 @@
 import { MDBContainer, MDBRow, MDBCol, MDBBtn, MDBIcon, MDBInput } from 'mdbreact'
 import '../css/login.css'
 import React from 'react'
-import {Link} from "react-router-dom";
 
-export class Login extends React.Component {
+export class Registration extends React.Component {
 
     submit() {
 
@@ -28,12 +27,22 @@ export class Login extends React.Component {
                             'borderRadius': '46px'}}>
                             <form>
                                 <br/>
-                                <p className="h5 text-center mb-4">Log in</p>
+                                <p className="h5 text-center mb-4">Registration</p>
                                 <div className="grey-text">
+                                    <MDBInput
+                                        id='name'
+                                        label="Your name"
+                                        icon="user"
+                                        group
+                                        type="text"
+                                        validate
+                                        error="wrong"
+                                        success="right"
+                                    />
                                     <MDBInput
                                         id='email'
                                         label="Your email"
-                                        icon="user"
+                                        icon="envelope"
                                         group
                                         type="email"
                                         validate
@@ -50,19 +59,23 @@ export class Login extends React.Component {
                                         error="wrong"
                                         success="right"
                                     />
+                                    <MDBInput
+                                        id='password_repeated'
+                                        label="Repeat your password"
+                                        icon="lock"
+                                        group
+                                        type="password"
+                                        validate
+                                        error="wrong"
+                                        success="right"
+                                    />
                                 </div>
                                 <div className="text-center">
                                     <MDBBtn style={{background:'rgb(142, 46, 56)', 'borderRadius': '46px', color: 'white'}}
-                                            color='rgb(142, 46, 56)' onClick={this.submit} href='/app'>
+                                            color='rgb(142, 46, 56)' onClick={this.submit} href='/login'>
                                         Send
                                         <MDBIcon far icon="paper-plane" className="ml-1" />
                                     </MDBBtn>
-                                    <br/><br/>
-                                    <Link to='/registration' style={{color:'rgba(74, 16, 22, 0.81)'}}>
-                                        you want to register you
-                                    </Link>
-                                    <br/>
-                                    <br/>
                                 </div>
                             </form>
                         </MDBCol>
