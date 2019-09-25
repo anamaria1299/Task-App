@@ -27,7 +27,8 @@ export class TodoList extends React.Component {
                 <form className="form-inline md-form mr-auto mb-4">
                     <MDBContainer style={{width: '95%'}}>
                         <MDBRow>
-                            <MDBCol sm="9">
+                            <MDBCol sm="3"/>
+                            <MDBCol sm="6">
                                 <input className="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search"/>
                                 <button className="btn young-passion-gradient btn-rounded btn-sm my-0"  style={{ 'borderRadius': '46px', color: 'white'}}type="submit">Search</button>
                                 <Grid container id='todoList' direction="column" justify="space-evenly" alignItems="stretch">
@@ -37,6 +38,7 @@ export class TodoList extends React.Component {
                                     </Grid>
                                 </Grid>
                             </MDBCol>
+                            <MDBCol sm="3"/>
                         </MDBRow>
                     </MDBContainer>
                 </form>

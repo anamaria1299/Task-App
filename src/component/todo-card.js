@@ -3,8 +3,6 @@ import React from 'react'
 export class TodoCard extends React.Component{
 
     render() {
-
-        // TODO review description and render
         return (
             <div id={this.props.title}>
                 <div className="card card-cascade wider mb-4">
@@ -22,7 +20,7 @@ export class TodoCard extends React.Component{
                         </h6>
                         <p className="mb-0">
                             <i className="fas fa-calendar mr-2"/>
-                            date
+                            {this.props.endDate.split("T")[0]}
                         </p>
                         <p className="card-text justify">{this.props.description}</p>
                     </div>

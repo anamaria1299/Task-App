@@ -1,16 +1,19 @@
 import MenuItem from '@material-ui/core/MenuItem'
 import Select from '@material-ui/core/Select'
+import DatePicker from 'react-datepicker'
 import React, {Component} from 'react'
-import {TodoList} from './todo-list'
-import moment from 'moment'
 import '../css/todoApp.css'
+import moment from 'moment'
+import "react-datepicker/dist/react-datepicker.css";
+
+
 
 export class TodoApp extends Component {
 
     constructor(props) {
 
         super(props)
-        this.state = {items: [], description: '', priority: 0, endDate: moment().format('YYYY-MM-DD'), title: '', open: false}
+        this.state = {items: [], description: '', priority: 0, endDate: moment(), title: '', open: false}
         this.handleTitleChange = this.handleTitleChange.bind(this)
         this.handlePriorityChange = this.handlePriorityChange.bind(this)
         this.handleDateChange = this.handleDateChange.bind(this)
@@ -43,10 +46,13 @@ export class TodoApp extends Component {
                                    onChange={this.handleTitleChange}
                             />
 
-                            <input placeholder="Due date" type="date" id="endDate"
-                                   className="form-control datepicker" onChange={this.handleDateChange}
-                                   value={this.state.endDate}
-                            />
+                            <DatePicker
+                                id="due-date"
+                                placeholderText="Due date"
+                                selected={this.state.endDate}
+                                onChange={this.handleDateChange}>
+
+                            </DatePicker>
 
                             Priority <Select
                                 value={this.state.priority}
@@ -114,6 +120,7 @@ export class TodoApp extends Component {
     }
 
     handleDateChange(date) {
+
         this.setState({
             endDate: date
         });
@@ -136,7 +143,7 @@ export class TodoApp extends Component {
             items: prevState.items.concat(newItem),
             title: '',
             priority: '',
-            endDate: moment().format('YYYY-MM-DD'),
+            endDate: moment(),
             description: '',
         }))
 
