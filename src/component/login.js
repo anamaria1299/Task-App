@@ -13,7 +13,7 @@ export class Login extends React.Component {
 
         console.log(email)
         console.log(password)
-        axios.post('http://task-app-ana-api.herokuapp.com/members/login', {
+        axios.post('https://task-app-ana-api.herokuapp.com/members/login', {
             name: email,
             email: email,
             password: password
@@ -22,7 +22,6 @@ export class Login extends React.Component {
             console.log(response.data);
             localStorage.setItem("accessToken",response.data.accessToken);
             localStorage.setItem("isLoggedIn",true);
-            localStorage.setItem('isLoggedIn', true)
             window.location.href = "/app";
         })
         .catch(function (error) {
