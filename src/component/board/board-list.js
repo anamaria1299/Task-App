@@ -30,16 +30,18 @@ export class BoardList extends React.Component {
 
     componentDidMount() {
 
-        axios.get('https://task-app-ana-api.herokuapp.com/boards')
-            .then((data) => {
-                let boardList = []
-                data.data.forEach((board) => {
-                    boardList.push(
-                        <BoardCard key={board.id} id={board.id} title={board.name}/>
-                    )
-                })
-                this.setState({boardList: boardList})
+        axios.get('https://task-app-ana-api.herokuapp.com/boards', {
+            Authorization: 'Bearer '+ localStorage.getItem('accessToken')
+        })
+        .then((data) => {
+            let boardList = []
+            data.data.forEach((board) => {
+                boardList.push(
+                    <BoardCard key={board.id} id={board.id} title={board.name}/>
+                )
             })
+            this.setState({boardList: boardList})
+        })
     }
 
     handleOpen() {

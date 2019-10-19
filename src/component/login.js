@@ -2,6 +2,7 @@ import { MDBContainer, MDBRow, MDBCol, MDBBtn, MDBIcon, MDBInput } from 'mdbreac
 import '../css/login.css'
 import React from 'react'
 import {Link} from "react-router-dom";
+import * as axios from "axios";
 
 export class Login extends React.Component {
 
@@ -9,11 +10,25 @@ export class Login extends React.Component {
 
         const email = document.getElementById('email').value
         const password = document.getElementById('password').value
-        if(email!=='' && password!=='') {
+
+        console.log(email)
+        console.log(password)
+        axios.post('http://task-app-ana-api.herokuapp.com/members/login', {
+            name: email,
+            email: email,
+            password: password
+        })
+        .then(function (response) {
+            console.log(response.data);
+            localStorage.setItem("accessToken",response.data.accessToken);
+            localStorage.setItem("isLoggedIn",true);
             localStorage.setItem('isLoggedIn', true)
-            localStorage.setItem('email', email)
-            localStorage.setItem('password', password)
-        }
+            window.location.href = "/app";
+        })
+        .catch(function (error) {
+            alert("Failed when try to login");
+            console.log(error);
+        });
     }
 
     render() {
