@@ -23,8 +23,10 @@ export class ListList extends React.Component {
         this.setState({ boardList: this.props.location.boardId})
 
         axios.get(`https://task-app-ana-api.herokuapp.com/boards/${this.props.location.boardId}/lists`, {
-                Authorization: 'Bearer '+ localStorage.getItem('accessToken')
-            })
+            headers: {
+                Authorization: 'Bearer '+ localStorage.getItem('accessToken'),
+            },
+        })
             .then((data) => {
                 let list = []
                 data.data.forEach((l) => {
@@ -49,7 +51,9 @@ export class ListList extends React.Component {
         //todo review board id
         this.setState({listName: e.target.value})
         axios.get(`https://task-app-ana-api.herokuapp.com/boards/${this.state.boardList}/lists/${e.target.value}/cards`,{
-            Authorization: 'Bearer '+ localStorage.getItem('accessToken')
+            headers: {
+                Authorization: 'Bearer '+ localStorage.getItem('accessToken'),
+            },
         })
             .then((data) => {
                 let cards = []

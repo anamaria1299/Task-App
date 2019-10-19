@@ -11,8 +11,8 @@ export class Login extends React.Component {
         const email = document.getElementById('email').value
         const password = document.getElementById('password').value
 
-        console.log(email)
-        console.log(password)
+        console.log('on submit')
+
         axios.post('https://task-app-ana-api.herokuapp.com/members/login', {
             name: email,
             email: email,
@@ -21,7 +21,7 @@ export class Login extends React.Component {
         .then(function (response) {
             console.log(response.data);
             localStorage.setItem("accessToken",response.data.accessToken);
-            localStorage.setItem("isLoggedIn",true);
+            localStorage.setItem("isLoggedIn", true);
             window.location.href = "/app";
         })
         .catch(function (error) {
@@ -67,7 +67,7 @@ export class Login extends React.Component {
                                 </div>
                                 <div className="text-center">
                                     <MDBBtn style={{background:'rgb(142, 46, 56)', 'borderRadius': '46px', color: 'white'}}
-                                            color='rgb(142, 46, 56)' onClick={this.submit} href='/app'>
+                                            color='rgb(142, 46, 56)' onClick={this.submit}>
                                         Send
                                         <MDBIcon far icon="paper-plane" className="ml-1" />
                                     </MDBBtn>

@@ -31,7 +31,9 @@ export class BoardList extends React.Component {
     componentDidMount() {
 
         axios.get('https://task-app-ana-api.herokuapp.com/boards', {
-            Authorization: 'Bearer '+ localStorage.getItem('accessToken')
+            headers: {
+                Authorization: 'Bearer '+ localStorage.getItem('accessToken'),
+            },
         })
         .then((data) => {
             let boardList = []
