@@ -21,11 +21,11 @@ export class Card extends React.Component{
                             Priority: {this.props.priority}
                         </p>
                         <p className="card-text justify">Description:</p>
-                        <p className="card-text justify">{this.props.description}</p>
                         <p className="mb-0">
                             <i className="fas fa-calendar mr-2"/>
                             {this.props.endDate.split("T")[0]}
                         </p>
+                        <p className="card-text justify">{this.props.description}</p>
                     </div>
                 </div>
             </div>

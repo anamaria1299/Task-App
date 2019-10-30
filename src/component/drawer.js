@@ -67,10 +67,10 @@ export class Drawer extends React.Component {
             <div>
                 <List>
                     <ListItem button>
-                        <Link to='/boards'>
+                        <Link to='/cards'>
                             <DashboardIcon style={{color:'rgb(142, 46, 56)'}}/>
                         </Link>
-                        <ListItemText primary='Boards'/>
+                        <ListItemText primary='Cards'/>
                     </ListItem>
                 </List>
                 <Divider />

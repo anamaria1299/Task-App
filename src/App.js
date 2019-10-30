@@ -20,12 +20,10 @@ export class App extends React.Component {
             <Route path='/boards' component={Drawer}/>
             <Route path='/cards' component={Drawer}/>
             <Route path='/app' component={Drawer}/>
-            <Route path='/app' component={BoardList}/>
             <Route path='/new' component={Drawer}/>
             <Route path='/login' component={Login}/>
             <Route path='/new' component={TodoApp}/>
-            <Route path='/cards' component={ListList} />
-            <Route path="/boards" component={BoardList}/>
+            <Route path='/app' component={ListList} />
         </div>
       )
     }

@@ -13,7 +13,7 @@ export class Login extends React.Component {
 
         console.log('on submit')
 
-        axios.post('https://task-app-ana-api.herokuapp.com/members/login', {
+        axios.post('https://task-app-ana-api.herokuapp.com/users/login', {
             name: email,
             email: email,
             password: password
