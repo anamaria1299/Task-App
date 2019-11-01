@@ -26,8 +26,10 @@ export class TodoApp extends Component {
             state: '',
             openUsers: false,
             openState: false,
-            open: false
+            open: false,
+            file: ''
         }
+
         this.handleTitleChange = this.handleTitleChange.bind(this)
         this.handlePriorityChange = this.handlePriorityChange.bind(this)
         this.handleDateChange = this.handleDateChange.bind(this)
@@ -43,6 +45,7 @@ export class TodoApp extends Component {
         this.handleLocalStorage = this.handleLocalStorage.bind(this)
         this.componentDidMount = this.componentDidMount.bind(this)
         this.handleResponsibleChange = this.handleResponsibleChange.bind(this)
+        this.handleInputChange = this.handleInputChange.bind(this)
     }
 
     componentDidMount() {
@@ -115,6 +118,8 @@ export class TodoApp extends Component {
                               onChange={this.handleDescriptionChange} value={this.state.description}
                             />
 
+                            <input type="file" id="file" onChange={this.handleInputChange}/>
+
                             Responsible <Select
                                 value={this.state.responsibleName}
                                 open={this.state.openUsers}
@@ -143,7 +148,6 @@ export class TodoApp extends Component {
                                 <MenuItem value={"DONE"}>DONE</MenuItem>
                             </Select>
 
-                            <br/>
 
                             <button className="btn btn-rounded btn-block z-depth-0 my-4 waves-effect
                                 young-passion-gradient" style={{ 'borderRadius': '46px', color: 'white'}} type="submit"
@@ -231,7 +235,24 @@ export class TodoApp extends Component {
         });
     }
 
+    handleInputChange(e) {
+        this.setState({
+            file: e.target.files[0]
+        });
+    }
+
     handleSubmit(e) {
+
+        let data = new FormData();
+        data.append('file', this.state.file);
+
+        axios.post('http://localhost:8080/api/files', data)
+            .then(function (response) {
+                console.log("file uploaded!", data);
+            })
+            .catch(function (error) {
+                console.log("failed file upload", error);
+            });
 
         e.preventDefault();
 
