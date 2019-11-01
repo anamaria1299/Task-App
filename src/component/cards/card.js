@@ -20,12 +20,14 @@ export class Card extends React.Component{
                         <p className="card-header-title mb-3" style={{'fontStyle': 'italic'}}>
                             Priority: {this.props.priority}
                         </p>
-                        <p className="card-text justify">Description:</p>
                         <p className="mb-0">
                             <i className="fas fa-calendar mr-2"/>
                             {this.props.endDate.split("T")[0]}
                         </p>
-                        <p className="card-text justify">{this.props.description}</p>
+                        <p className="card-text justify">
+                            Description:<br/>
+                            {this.props.description}
+                        </p>
                     </div>
                 </div>
             </div>

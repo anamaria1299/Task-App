@@ -11,8 +11,6 @@ export class Login extends React.Component {
         const email = document.getElementById('email').value
         const password = document.getElementById('password').value
 
-        console.log('on submit')
-
         axios.post('https://task-app-ana-api.herokuapp.com/users/login', {
             name: email,
             email: email,

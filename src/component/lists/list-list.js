@@ -42,7 +42,6 @@ export class ListList extends React.Component {
                     this.setState({cards: cards})
                 })
             })
-
     }
 
     render() {

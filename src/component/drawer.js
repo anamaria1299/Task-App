@@ -67,10 +67,16 @@ export class Drawer extends React.Component {
             <div>
                 <List>
                     <ListItem button>
-                        <Link to='/cards'>
+                        <Link to='/app'>
                             <DashboardIcon style={{color:'rgb(142, 46, 56)'}}/>
                         </Link>
                         <ListItemText primary='Cards'/>
+                    </ListItem>
+                    <ListItem button>
+                        <Link to='/new-todo'>
+                            <DashboardIcon style={{color:'rgb(142, 46, 56)'}}/>
+                        </Link>
+                        <ListItemText primary='Add card'/>
                     </ListItem>
                 </List>
                 <Divider />

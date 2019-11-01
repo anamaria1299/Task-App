@@ -1,5 +1,4 @@
 import { Route, BrowserRouter} from 'react-router-dom'
-import {BoardList} from './component/board/board-list'
 import {Registration} from './component/registration'
 import {ListList} from './component/lists/list-list'
 import {TodoApp} from './component/todo-app'
@@ -17,13 +16,11 @@ export class App extends React.Component {
 
       return (
         <div>
-            <Route path='/boards' component={Drawer}/>
-            <Route path='/cards' component={Drawer}/>
             <Route path='/app' component={Drawer}/>
-            <Route path='/new' component={Drawer}/>
-            <Route path='/login' component={Login}/>
-            <Route path='/new' component={TodoApp}/>
             <Route path='/app' component={ListList} />
+            <Route path='/login' component={Login}/>
+            <Route path='/new-todo' component={Drawer}/>
+            <Route path='/new-todo' component={TodoApp}/>
         </div>
       )
     }
